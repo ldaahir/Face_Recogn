@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
+    <script src="{% static 'js/main.js' %}" defer></script>
+    <title>Train Model</title>
+</head>
+<body>
+    {% include "navbar.html" %}
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="text-center mt-4">Welcome to the Training Page</h3>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <form action="{% url 'rename' %}" id="upload-form" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="Images">Upload Images</label>
+                                <input type="file" class="form-control" required id="Images" name="Images" multiple accept=".png, .jpeg, .jpg">
+                            </div>
+
+                            <div class="d-flex justify-content-between mt-3">
+                                <button type="submit" class="btn btn-primary col-4">Train</button>
+                                <button type="reset" class="btn btn-danger col-4">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if info_of_image.dup_header != "" %}
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ info_of_image.remove_header }}</h5>
+                        <p class="card-text">{{ info_of_image.rem_content }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ info_of_image.dup_header }}</h5>
+                        <p class="card-text">{{ info_of_image.dup_content }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ num_of_image.header }}</h5>
+                        <p class="card-text">{{ num_of_image.content }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

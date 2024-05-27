@@ -22,10 +22,13 @@ def check(request):
         Pass = request.POST ["pass"]
         userka = db.get_user(user)
         try:
-            if user == userka[0] and Pass == userka[2]:
-                return render(request,"index.html")
+            if user == userka[0] and Pass == userka[3]:
+                request.session["user"] = userka[0] 
+                request.session["type"] = userka[2]
+                 
+                return render(request,"index.html",{"users":db.get_users(),"students":db.get_students()})
             else:
-                Userka = "User or Password is incorrect"
+                userka = "User or Password is incorrect"
         except:
             userka = "This User user is not exsits"
     return render(request,"login.html",{"user":userka})
@@ -34,9 +37,9 @@ def save(request):
         user = request.POST ["user"]
         Pass = request.POST ["pass"]
         gmai = request.POST ["gmail"]
-        print("gmail waa : ",gmai[-10:])
+        user_type = request.POST ["type"]
         if gmai[-10:] == "@gmail.com":
-            x = db.insert_user(user,gmai,Pass)
+            x = db.insert_user(user,gmai,user_type,Pass)
             print(x)
             if x == None:
                 return render(request,"login.html",{"user": "user is created successfully"})
@@ -47,7 +50,7 @@ def save(request):
             return render(request,"login.html",{"user":"invalid gmail"})
 
 def index(request):
-    return render(request,"index.html")
+    return render(request,"index.html",{"users":db.get_users(),"students":db.get_students()})
 def train(request):
     return render(request,"train.html",{"num_of_image":{"header":"","content":""},"info_of_image":{"dup_header":"","dup_content":"","remove_header":" ","rem_content":""}})
 def test(request):

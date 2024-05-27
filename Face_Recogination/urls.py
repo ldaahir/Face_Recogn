@@ -1,10 +1,11 @@
 from django.urls import path
 from .views import *
 urlpatterns=[
-    path("",login,name="login"),
+
+    path("dashboard/",login,name="login"),
     path("check/",check,name="check"),
     path("save/",save,name="save"),
-    path("dashboard/",index,name="index"),
+    path("",index,name="index"),
     path("train/",train,name="train"),
     path("test/",test,name="test"),
     path("logout/",logout,name="logout"),

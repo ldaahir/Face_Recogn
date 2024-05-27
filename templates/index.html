@@ -1,83 +1,86 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css">
-    <script src="{% static 'js/main.js' %}" defer></script>
-    <title>Dashboard</title>
-</head>
-<body>
-   {% include "navbar.html" %}
+{% include 'navbar.html' %}
 
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="text-center mt-4">Welcome to Our Dashboard</h3>
-            </div>
+
+
+
+
+
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Students</h6>
+            <a href="#">Show All</a>
         </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">Student ID</th>
+                        <th scope="col">Student Name</th>
+                        <th scope="col">Student Class</th>
+                        <th scope="col">Student Tell</th>
+                        <th scope="col">Student Image</th>
+                        <th scope="col">Student Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in students %}
+                    <!-- {{row}} -->
+                    
+                    <tr>
+                        <td>{{ row.0 }}</td>
+                        <td>{{ row.1 }}</td>
+                        <td>{{ row.2 }}</td>
+                        <td>{{ row.3 }}</td>
+                        <td>{{ row.4 }}</td>
 
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Component 1</h5>
-                        <p class="card-text">This is the first component of the dashboard.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Component 2</h5>
-                        <p class="card-text">This is the second component of the dashboard.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Component 3</h5>
-                        <p class="card-text">This is the third component of the dashboard.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-4">
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Component 4</h5>
-                        <p class="card-text">This is the fourth component of the dashboard.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Component 5</h5>
-                        <p class="card-text">This is the fifth component of the dashboard.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Component 6</h5>
-                        <p class="card-text">This is the sixth component of the dashboard.</p>
-                    </div>
-                </div>
-            </div>
+                        
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="bg-light text-center rounded p-4">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Users</h6>
+            <a href="#">Show All</a>
+        </div>
+        <div class="table-responsive">
+            <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <thead>
+                    <tr class="text-dark">
+                        <th scope="col">User</th>
+                        <th scope="col">Type</th>
+                        <th scope="col">Gmail</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in users %}
+                    <!-- {{row}} -->
+                    
+                    {{row.4}}
+                    <tr>
+                        <td>{{ row.0 }}</td>
+                        <td>{{ row.1 }}</td>
+                        <td>{{ row.2 }}</td>
+                        
+                        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}

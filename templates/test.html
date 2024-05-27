@@ -13,11 +13,7 @@
     {% include "navbar.html" %}
 
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="text-center mt-4">Welcome to the Training Page</h3>
-            </div>
-        </div>
+       
 
         <div class="row mt-4">
             <div class="col-md-12">
@@ -78,7 +74,7 @@
                         <td>{{ row.2 }}</td>
                         <td>{{ row.3 }}</td>
                         <td>
-                            <img src="../{{ row.4 }}" class="student-image img-thumbnail fixed-size-img" alt="Student Image" style="width: 50px; height: 50px;">
+                            <img src="{{ row.4 }}" class="student-image img-thumbnail fixed-size-img" alt="Student Image" style="width: 50px; height: 50px;">
                         </td>
                     </tr>
                     {% endfor %}

@@ -56,13 +56,14 @@ class Data:
         CREATE TABLE IF NOT EXISTS Users (
             User text NOT NULL unique,
             Gmail text NOT NULL unique,
+            user_type not null,
             Pass text NOT NULL
         );
         """
         try:
             c = self.conn.cursor()
             c.execute(create_table_sql)
-            c.execute("insert into Users (User,Gmail,Pass) (administrator,administrator@gmail.com,admin)")
+            c.execute("insert into Users (User,Gmail,user_type,Pass) (administrator,administrator@gmail.com,admin,1234)")
             print("Table Users created or already exists.")
         except Error as e:
             return e
@@ -79,12 +80,12 @@ class Data:
             print(e)
 
 
-    def insert_user(self, User, gmail, Pass):
+    def insert_user(self, User, gmail,user_type, Pass):
         """Insert a new row into the Student table."""
-        sql = "INSERT INTO Users (User, gmail, Pass) VALUES (?, ?, ?)"
+        sql = "INSERT INTO Users (User, gmail, user_type,Pass) VALUES (?, ?, ?, ?)"
         try:
             cur = self.conn.cursor()
-            cur.execute(sql, (User, gmail, Pass))
+            cur.execute(sql, (User, gmail,user_type, Pass))
             self.conn.commit()
             print(f"Inserted User: ID={User}, Name={gmail}, Class={Pass}")
         except Error as e:
@@ -204,5 +205,31 @@ class Data:
         except Error as e:
             print(e)
             return []
+    def get_users(self):
+        try:
+            cur = self.conn.cursor()
+            cur.execute("select * from Users")
+            rows = cur.fetchall()
+            List = []
+            for i in rows:
+                List.append(i)
+            return List
+        except Error as e:
+            print(e)
+            return []
+        
+
+    def get_students(self):
+            try:
+                cur = self.conn.cursor()
+                cur.execute("select * from Student ")
+                rows = cur.fetchall()
+                List = []
+                for i in rows:
+                    List.append(i)
+                return List
+            except Error as e:
+                print(e)
+                return []
 
 
